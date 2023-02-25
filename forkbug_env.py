@@ -42,6 +42,7 @@ class ForkbugEnv(gym.Env):
         self.forkbugOrn = None
 
         self.target     = None
+        self.cubeID     = None
 
         self.action_space      = spaces.Box(np.array([-1]*3), np.array([1]*3)) # v, w, a
         self.observation_space = spaces.Box(np.array([-1]*6), np.array([1]*6)) # x y theta x_0 y_0 theta_0
@@ -87,6 +88,12 @@ class ForkbugEnv(gym.Env):
 
         
         self.target = [random.uniform(-0.6, 0.6), random.uniform(-0.6, 0.6), 0.0]
+
+        self.cubeID = p.loadURDF("dummy_cube.urdf", self.target, p.getQuaternionFromEuler([0, 0, 0]),
+                                    flags=p.URDF_USE_INERTIA_FROM_FILE)
+
+        # self.cubeID = p.loadURDF('sphere.urdf', self.target, p.getQuaternionFromEuler([0, 0, 0]))
+
 
         p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 1)
         self.__make_observation()

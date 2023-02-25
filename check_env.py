@@ -13,6 +13,7 @@ while env.step_counter < 1000:
 
 env.step([0., 0., 0.])
 obs, _, _, _ = env.step(action)
-print( obs )
+print('robot state :', obs[0:3] )
+print('cube  state :', obs[3:6] )
 
 input('terminate on key press')
